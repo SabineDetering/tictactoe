@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicTacToe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
@@ -16,10 +20,28 @@
         <div id="player-cross">
             <img src="./img/cross.png">Player 1
         </div>
-        <div id="player-circle" class="player-inactive">
+        <div id="player-circle" class="player-inactive" >
             <img src="./img/circle.png"> Player 2
         </div>
     </div>
+
+    <div id="start-screen" class="screen start">
+        <div class="screen-text">Choose playing mode:</div>
+        <div>
+            <label class="form-control">
+                <input type="radio" name="mode" />
+                1 Player
+            </label>
+
+            <label class="form-control">
+                <input type="radio" name="mode" checked="checked"/>
+                2 Players
+            </label>
+        </div>
+        <button onclick="start()">Start</button>
+    </div>
+    </div>
+
     <div class="playfield">
         <table>
             <tr>
@@ -65,13 +87,16 @@
                 </td>
             </tr>
         </table>
-        <div id="line"></div>
+        <div id="line-1" class="line"></div>
+        <div id="line-2" class="line"></div>
     </div>
 
-    <div id="gameover-screen">
+    <div id="gameover-screen" class="screen finish">
         <img src="./img/game-over.png" alt="">
-        <div id="winner-text">The winner is </div>
-        <button onclick="reset()">Restart</button>
+        <div class="gameover-bottom">
+            <div id="winner-text" class="screen-text">The winner is </div>
+            <button onclick="reset()">Restart</button>
+        </div>
     </div>
 
 </body>

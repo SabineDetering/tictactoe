@@ -26,12 +26,17 @@ function getId(id) {
     return document.getElementById(id);
 }
 
+function start() {
+    getId('start-screen').style.transform = 'scale(0)';
+}
+
 function placeShape(id) {
     if (!fields[id] && !gameOver) {
         fields[id] = currentShape;
         numberOfMoves++;
         draw();
         checkForWin();
+        checkForTie();
         togglePlayer();
     }
 }
@@ -64,45 +69,66 @@ function checkForWin() {
         if (fields[pattern[0]] == currentShape &&
             fields[pattern[1]] == currentShape &&
             fields[pattern[2]] == currentShape) {
+            if (!gameOver) {//first winning pattern
+                showWinningLine(1, i, currentShape);
+            } else {//second winning pattern
+                showWinningLine(2, i, currentShape);
+            }
             gameOver = true;
-            showWinningLine(i, currentShape);
-            showWinner(currentShape);
+            setTimeout(showWinner, 1500, currentShape);
         }
     }
+}
+
+function checkForTie() {
     if (!gameOver && numberOfMoves == 9) {
         gameOver = true;
-        showTie();
+        setTimeout(showTie, 1000);
     }
 }
-function showGameover() {
-    getId('gameover-screen').style.transform = "scale(1)";
-}
 function showTie() {
-    showGameover();  
-    
+    getId('winner-text').innerHTML = `Tie!`;
+    showGameover();
 }
 
 function showWinner(shape) {
-    showGameover();  
-    getId('winner-text').innerHTML = `The winner is ${shape}!`;
-    getId('winner-text').style.backgroundColor = (shape == 'circle' ? colorOfCircle : colorOfCross);
+    getId('winner-text').innerHTML = `The winner is
+    ${(shape == 'cross' ? 'Player 1' : 'Player 2')} &nbsp
+    <img src="./img/${shape}.png" style="width:40px;height:40px;">`;
+    ;
+    showGameover();
 }
-function showWinningLine(index, shape) {
-    let line = winningPatterns[index].line;
-    getId('line').style.backgroundColor = (shape == 'circle' ? colorOfCircle : colorOfCross);
-    for (const style in line) {
-        getId('line').style[style] = line[style];
+
+function showGameover() {
+    getId('gameover-screen').style.transform = "scale(1)";
+}
+
+function showWinningLine(number, index, shape) {
+    let winningLine = winningPatterns[index].line;
+    let displayedLine = getId('line-' + number);
+    displayedLine.style.backgroundColor = (shape == 'circle' ? colorOfCircle : colorOfCross);
+    for (const style in winningLine) {
+        displayedLine.style[style] = winningLine[style];
     }
 }
 function reset() {
-    fields = [];
-    for (let i = 0; i < 8; i++) {
+    resetDisplay();
+    resetVars();
+}
+function resetDisplay() {
+    for (let i = 0; i < 9; i++) {
         getId('circle-' + i).classList.add('d-none');
-        getId('cross' + i).classList.add('d-none');
+        getId('cross-' + i).classList.add('d-none');
     }
-    getId('line').style.transform = 'scale(0)';
-
-    let currentShape = 'cross';
-    let numberOfMoves = 0;
-    let gameOver = false;
+    getId('line-1').style.transform = 'scale(0)';
+    getId('line-2').style.transform = 'scale(0)';
+    getId('gameover-screen').style.transform = "scale(0)";
+    getId("player-cross").classList.remove("player-inactive");
+    getId("player-circle").classList.add("player-inactive");
+}
+function resetVars() {
+    fields = [];
+    currentShape = 'cross';
+    numberOfMoves = 0;
+    gameOver = false;
 }

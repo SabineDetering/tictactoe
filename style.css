@@ -1,13 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: ivory;
-    width:100%;
+    width: 100%;
+    font-family: 'Audiowide', cursive;
 }
-h1{
+
+h1 {
     font-size: 60px;
+}
+
+.form-control {
+    font-size: 20px;
+}
+
+.form-control+.form-control {
+    margin-left: 16px;
+}
+
+input[type="radio"] {    
+    margin: 0;
+    font: inherit;
+    accent-color: #ff1616;
+    width: 16px;
+    height: 16px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+button {
+    background-color: #ffde59;
+    border: 2px solid #ff1616;
+    font-size: 28px;
+    padding: 8px;
+    box-shadow: 2px 2px 5px 2px rgba(92, 6, 6, 0.7);
+    margin: 20px;
 }
 
 .player-panel {
@@ -33,13 +66,15 @@ h1{
 .player-inactive {
     opacity: 0.4;
 }
-.playfield{
-    width:399px;
-    max-width:100vw;
-    height:399px;
-    max-height:100vw;
+
+.playfield {
+    width: 399px;
+    max-width: 100vw;
+    height: 399px;
+    max-height: 100vw;
     position: relative;
 }
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -91,26 +126,52 @@ table img {
 }
 
 
-#line{
+.line {
     height: 8px;
-    position:absolute;
-    z-index:1;
-    transform:scale(0);
+    position: absolute;
+    z-index: 1;
+    transform: scale(0);
     transition: transform 1000ms ease-in-out;
 }
-#gameover-screen{
-    position:absolute;
+
+.screen {
+    position: absolute;
+    top: 160px;
     z-index: 2;
-    background-color: ivory;
-    width:600px;
-    max-width:100vw;
-    height:400px;
-    max-height: 100vh;
+    width: 600px;
+    max-width: 100vw;
     transform: scale(0);
-    transition:transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-#winner-text{
-    font-size: 32px;
-    margin-top:32px;
+.start {
+    transform: scale(1);
+    border: #ff1616 2px solid;
+    background-color: rgb(255, 255, 240);
+    box-shadow: 2px 2px 8px 3px rgba(92, 6, 6, 0.7);
+}
+
+.finish {
+    transform: scale(0);
+    background-color: rgba(255, 255, 240, 0.95);
+}
+
+.gameover-bottom {
+    position: absolute;
+    top: 60%;
+    width: 100%;
+    text-align: center;
+}
+
+.screen-text {
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
