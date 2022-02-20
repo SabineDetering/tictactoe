@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="computer-moves.js"></script>
 </head>
 
 <body>
@@ -20,24 +21,49 @@
         <div id="player-cross">
             <img src="./img/cross.png">Player 1
         </div>
-        <div id="player-circle" class="player-inactive" >
+        <div id="player-circle" class="player-inactive">
             <img src="./img/circle.png"> Player 2
         </div>
     </div>
 
     <div id="start-screen" class="screen start">
+
         <div class="screen-text">Choose playing mode:</div>
         <div>
             <label class="form-control">
-                <input type="radio" name="mode" />
-                1 Player
+                <input type="radio" name="mode" value="1" />
+                1 player
             </label>
-
             <label class="form-control">
-                <input type="radio" name="mode" checked="checked"/>
-                2 Players
+                <input type="radio" name="mode" value="2" checked="checked" />
+                2 players
             </label>
         </div>
+
+        <div class="screen-text">Choose difficulty level (1 player):</div>
+        <div>
+            <label class="form-control">
+                <input type="radio" name="difficulty" value="easy" checked="checked" />
+                easy
+            </label>
+            <label class="form-control">
+                <input type="radio" name="difficulty" value="difficult" />
+                difficult
+            </label>
+        </div>
+
+        <div class="screen-text">Choose your symbol:</div>
+        <div>
+            <label class="form-control">
+                <input type="radio" name="difficulty" value="easy" checked="checked" />
+                easy
+            </label>
+            <label class="form-control">
+                <input type="radio" name="difficulty" value="difficult" />
+                difficult
+            </label>
+        </div>
+
         <button onclick="start()">Start</button>
     </div>
     </div>

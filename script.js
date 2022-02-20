@@ -1,4 +1,7 @@
 let fields = [];
+for (let i = 0; i < 9; i++) { fields.push(''); }
+let numberofPlayers;
+let difficulty = 'easy';
 let currentShape = 'cross';
 let numberOfMoves = 0;
 let gameOver = false;
@@ -28,6 +31,8 @@ function getId(id) {
 
 function start() {
     getId('start-screen').style.transform = 'scale(0)';
+    numberofPlayers = +document.querySelector('input[name="mode"]:checked').value;
+    difficulty = document.querySelector('input[name="difficulty"]:checked').value;
 }
 
 function placeShape(id) {
@@ -38,6 +43,9 @@ function placeShape(id) {
         checkForWin();
         checkForTie();
         togglePlayer();
+        if (!gameOver && numberofPlayers == 1 && numberOfMoves % 2 == 1) {
+            setTimeout(computerMove, 500);
+        }
     }
 }
 
@@ -127,7 +135,7 @@ function resetDisplay() {
     getId("player-circle").classList.add("player-inactive");
 }
 function resetVars() {
-    fields = [];
+    for (let i = 0; i < 9; i++) {fields[i]=''; }
     currentShape = 'cross';
     numberOfMoves = 0;
     gameOver = false;
