@@ -6,13 +6,20 @@ let currentShape = 'cross';
 let numberOfMoves = 0;
 let gameOver = false;
 let winningPatterns = [];
-let colorOfCircle = '';
-let colorOfCross = '';
+let symbolCircle;
+let symbolCross;
 
-let yellowCircle = { image: './img/circle-yellow.png', color: '#ffde59' };
-let redCircle = { image: './img/circle-red.png', color: '#ff1616' };
-let blueCross = { image: './img/cross-blue.png', color: '#38b6ff' };
-let greenCross = { image: './img/cross-green.png', color: '#7ed957' };
+function symbolMaker(image, color) {
+    return { image, color };
+}
+let symbols = {
+    'yellowCircle': symbolMaker('./img/circle-yellow.png', '#ffde59'), 'redCircle': symbolMaker('./img/circle-red.png', '#ff1616'), 'blueCross': symbolMaker('./img/cross-blue.png', '#38b6ff'), 'greenCross': symbolMaker('./img/cross-green.png', '#7ed957')
+}
+
+// let yellowCircle = { image: './img/circle-yellow.png', color: '#ffde59' };
+// let redCircle = { image: './img/circle-red.png', color: '#ff1616' };
+// let blueCross = { image: './img/cross-blue.png', color: '#38b6ff' };
+// let greenCross = { image: './img/cross-green.png', color: '#7ed957' };
 
 function lineMaker(pattern, top, left, width, transform) {
     return { pattern, line: { top, left, width, transform } }
@@ -38,6 +45,16 @@ function start() {
     getId('start-screen').style.transform = 'scale(0)';
     numberofPlayers = +document.querySelector('input[name="mode"]:checked').value;
     difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+    symbolCross = symbols[document.querySelector('input[name="symbol1"]:checked').value];
+    symbolCircle = symbols[document.querySelector('input[name="symbol2"]:checked').value];
+    renderGameScreen();
+}
+
+function renderGameScreen() {
+    getId('player-cross').innerHTML =
+        `<img src="${symbolCross.image}">Player 1`;
+    getId('player-circle').innerHTML =
+        `<img src="${symbolCircle.image}">Player 2`;
 }
 
 function placeShape(id) {
@@ -68,10 +85,11 @@ function togglePlayer() {
 
 function draw() {
     for (let i = 0; i < fields.length; i++) {
+        const field = getId('td-' + i);
         if (fields[i] == 'circle') {
-            getId('circle-' + i).classList.remove('d-none');
+            field.innerHTML = `<img src=${symbolCircle.image}>`
         } else if (fields[i] == 'cross') {
-            getId('cross-' + i).classList.remove('d-none');
+            field.innerHTML = `<img src=${symbolCross.image}>`
         }
     }
 }
@@ -105,9 +123,15 @@ function showTie() {
 }
 
 function showWinner(shape) {
-    getId('winner-text').innerHTML = `The winner is
-    ${(shape == 'cross' ? 'Player 1' : 'Player 2')} &nbsp
-    <img src="./img/${shape}.png" style="width:40px;height:40px;">`;
+    let winnerText = getId('winner-text');
+    winnerText.innerHTML = `The winner is `;
+    if (shape == 'cross') {
+        winnerText.innerHTML +=
+            `Player 1&nbsp <img src='${symbolCross.image}' style="width:40px;">`;
+    } else {
+        winnerText.innerHTML +=
+            `Player 2&nbsp <img src='${symbolCircle.image}' style="width:40px;">`;
+    }
     ;
     showGameover();
 }
@@ -119,7 +143,7 @@ function showGameover() {
 function showWinningLine(number, index, shape) {
     let winningLine = winningPatterns[index].line;
     let displayedLine = getId('line-' + number);
-    displayedLine.style.backgroundColor = (shape == 'circle' ? colorOfCircle : colorOfCross);
+    displayedLine.style.backgroundColor = (shape == 'circle' ? symbolCircle.color : symbolCross.color);
     for (const style in winningLine) {
         displayedLine.style[style] = winningLine[style];
     }
@@ -130,8 +154,7 @@ function reset() {
 }
 function resetDisplay() {
     for (let i = 0; i < 9; i++) {
-        getId('circle-' + i).classList.add('d-none');
-        getId('cross-' + i).classList.add('d-none');
+        getId('td-' + i).innerHTML = '';
     }
     getId('line-1').style.transform = 'scale(0)';
     getId('line-2').style.transform = 'scale(0)';
@@ -140,7 +163,7 @@ function resetDisplay() {
     getId("player-circle").classList.add("player-inactive");
 }
 function resetVars() {
-    for (let i = 0; i < 9; i++) {fields[i]=''; }
+    for (let i = 0; i < 9; i++) { fields[i] = ''; }
     currentShape = 'cross';
     numberOfMoves = 0;
     gameOver = false;

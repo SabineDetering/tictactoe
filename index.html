@@ -17,7 +17,7 @@
 
 <body>
     <h1>Tic Tac Toe</h1>
-
+<!--start screen----------------------------------------->
     <div id="start-screen" class="screen start">
 
         <div class="screen-text">Choose playing mode:</div>
@@ -50,10 +50,10 @@
                 <p class="t-center"> Player 1:</p>
                 <div>
                     <label class="form-control">
-                        <input type="radio" name="symbol1" value="blue" checked="checked" />
+                        <input type="radio" name="symbol1" value="blueCross" checked="checked" />
                         <img src="./img/cross-blue.png" alt="">
                     </label>
-                    <label class="form-control"><input type="radio" name="symbol1" value="green" />
+                    <label class="form-control"><input type="radio" name="symbol1" value="greenCross" />
                         <img src="./img/cross-green.png" alt="">
                     </label>
                 </div>
@@ -62,10 +62,10 @@
                 <p class="t-center">Player 2:</p>
                 <div>
                     <label class="form-control">
-                        <input type="radio" name="symbol2" value="yellow" checked="checked" />
+                        <input type="radio" name="symbol2" value="yellowCircle" checked="checked" />
                         <img src="./img/circle-yellow.png" alt="">
                     </label>
-                    <label class="form-control"><input type="radio" name="symbol2" value="red" />
+                    <label class="form-control"><input type="radio" name="symbol2" value="redCircle" />
                         <img src="./img/circle-red.png" alt="">
                     </label>
                 </div>
@@ -75,57 +75,38 @@
         <button onclick="start()">Start</button>
     </div>
 
+<!--game screen----------------------------------------->
     <div class="player-panel">
         <div id="player-cross">
-            <img src="./img/cross.png">Player 1
         </div>
         <div id="player-circle" class="player-inactive">
-            <img src="./img/circle.png"> Player 2
         </div>
     </div>
 
     <div class="playfield">
         <table>
             <tr>
-                <td onclick="placeShape(0)">
-                    <img id="circle-0" src="./img/circle.png" class="d-none ">
-                    <img id="cross-0" src="./img/cross.png" class="d-none ">
+                <td id="td-0" onclick="placeShape(0)">
                 </td>
-                <td onclick="placeShape(1)">
-                    <img id="circle-1" src="./img/circle.png" class="d-none ">
-                    <img id="cross-1" src="./img/cross.png" class="d-none ">
+                <td id="td-1" onclick="placeShape(1)">
                 </td>
-                <td onclick="placeShape(2)">
-                    <img id="circle-2" src="./img/circle.png" class="d-none ">
-                    <img id="cross-2" src="./img/cross.png" class="d-none ">
+                <td id="td-2" onclick="placeShape(2)">
                 </td>
             </tr>
             <tr>
-                <td onclick="placeShape(3)">
-                    <img id="circle-3" src="./img/circle.png" class="d-none ">
-                    <img id="cross-3" src="./img/cross.png" class="d-none ">
+                <td id="td-3" onclick="placeShape(3)">
                 </td>
-                <td onclick="placeShape(4)">
-                    <img id="circle-4" src="./img/circle.png" class="d-none ">
-                    <img id="cross-4" src="./img/cross.png" class="d-none ">
+                <td id="td-4" onclick="placeShape(4)">
                 </td>
-                <td onclick="placeShape(5)">
-                    <img id="circle-5" src="./img/circle.png" class="d-none ">
-                    <img id="cross-5" src="./img/cross.png" class="d-none ">
+                <td id="td-5" onclick="placeShape(5)">
                 </td>
             </tr>
             <tr>
-                <td onclick="placeShape(6)">
-                    <img id="circle-6" src="./img/circle.png" class="d-none ">
-                    <img id="cross-6" src="./img/cross.png" class="d-none ">
+                <td id="td-6" onclick="placeShape(6)">
                 </td>
-                <td onclick="placeShape(7)">
-                    <img id="circle-7" src="./img/circle.png" class="d-none ">
-                    <img id="cross-7" src="./img/cross.png" class="d-none ">
+                <td id="td-7" onclick="placeShape(7)">
                 </td>
-                <td onclick="placeShape(8)">
-                    <img id="circle-8" src="./img/circle.png" class="d-none ">
-                    <img id="cross-8" src="./img/cross.png" class="d-none ">
+                <td id="td-8" onclick="placeShape(8)">
                 </td>
             </tr>
         </table>
