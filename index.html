@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,66 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
+
 <body>
-    
+    <h1>Tic Tac Toe</h1>
+    <div class="player-panel">
+        <div id="player-cross" >
+            <img src="./img/cross.png">Player 1
+        </div>
+        <div  id="player-circle" class="player-inactive">
+            <img src="./img/circle.png"> Player 2
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <td onclick="fillShape(0)">
+                <img id="circle-0" src="./img/circle.png" class="d-none ">
+                <img id="cross-0" src="./img/cross.png" class="d-none ">
+            </td>
+            <td onclick="fillShape(1)">
+                <img id="circle-1" src="./img/circle.png" class="d-none ">
+                <img id="cross-1" src="./img/cross.png" class="d-none ">
+            </td>
+            <td onclick="fillShape(2)">
+                <img id="circle-2" src="./img/circle.png" class="d-none ">
+                <img id="cross-2" src="./img/cross.png" class="d-none ">
+            </td>
+        </tr>
+        <tr>
+            <td onclick="fillShape(3)">
+                <img id="circle-3" src="./img/circle.png" class="d-none ">
+                <img id="cross-3" src="./img/cross.png" class="d-none ">
+            </td>
+            <td onclick="fillShape(4)">
+                <img id="circle-4" src="./img/circle.png" class="d-none ">
+                <img id="cross-4" src="./img/cross.png" class="d-none ">
+            </td>
+            <td onclick="fillShape(5)">
+                <img id="circle-5" src="./img/circle.png" class="d-none ">
+                <img id="cross-5" src="./img/cross.png" class="d-none ">
+            </td>
+        </tr>
+        <tr>
+            <td onclick="fillShape(6)">
+                <img id="circle-6" src="./img/circle.png" class="d-none ">
+                <img id="cross-6" src="./img/cross.png" class="d-none ">
+            </td>
+            <td onclick="fillShape(7)">
+                <img id="circle-7" src="./img/circle.png" class="d-none ">
+                <img id="cross-7" src="./img/cross.png" class="d-none ">
+            </td>
+            <td onclick="fillShape(8)">
+                <img id="circle-8" src="./img/circle.png" class="d-none ">
+                <img id="cross-8" src="./img/cross.png" class="d-none ">
+            </td>
+        </tr>
+    </table>
+
+    <div id="line"></div>
+    <div id="winner-text">The winner is </div>
+
 </body>
+
 </html>
