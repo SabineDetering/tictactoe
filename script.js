@@ -5,24 +5,28 @@ let gameOver = false;
 let winningPatterns = [];
 let colorOfCircle = 'yellow';
 let colorOfCross = 'aqua';
+
+function lineMaker(pattern, top, left, width, transform) {
+    return { pattern, line: { top, left, width, transform } }
+}
 // horizontal
-winningPatterns.push({ pattern: [0, 1, 2], line: { top: '303px', width: '283px', transform: 'scale(1)' } });
-winningPatterns.push({ pattern: [3, 4, 5], line: { top: '440px', width: '283px', transform: 'scale(1)' } });
-winningPatterns.push({ pattern: [6, 7, 8], line: { top: '581px', width: '283px', transform: 'scale(1)' } });
+winningPatterns.push(lineMaker([0, 1, 2], '16.6%', '16%', '68%', 'scale(1)'));
+winningPatterns.push(lineMaker([3, 4, 5], '50%', '16%', '68%', 'scale(1)'));
+winningPatterns.push(lineMaker([6, 7, 8], '83.2%', '16%', '68%', 'scale(1)'));
 // vertical
-winningPatterns.push({ pattern: [0, 3, 6], line: { top: '440px', left: '446px', width: '283px', transform: 'rotate(90deg) scale(1)' } });
-winningPatterns.push({ pattern: [1, 4, 7], line: { top: '440px', left: '586px', width: '283px', transform: 'rotate(90deg)scale(1)' } });
-winningPatterns.push({ pattern: [2, 5, 8], line: { top: '440px', right: '448px', width: '283px', transform: 'rotate(90deg) scale(1)' } });
+winningPatterns.push(lineMaker([0, 3, 6], '50%', '-17.2%', '68%', 'rotate(90deg) scale(1)'));
+winningPatterns.push(lineMaker([1, 4, 7], '50%', '16.6%', '68%', 'rotate(90deg) scale(1)'));
+winningPatterns.push(lineMaker([2, 5, 8], '50%', '50%', '68%', 'rotate(90deg) scale(1)'));
 //diagonal
-winningPatterns.push({ pattern: [0, 4, 8], line: { top: '440px', width: '400px', transform: 'rotate(45deg) scale(1)' } });
-winningPatterns.push({ pattern: [2, 4, 6], line: { top: '440px', width: '400px', transform: 'rotate(-45deg) scale(1)' } });
+winningPatterns.push(lineMaker([0, 4, 8], '50%', '2.7%', '96%', 'rotate(45deg) scale(1)'));
+winningPatterns.push(lineMaker([2, 4, 6], '50%', '1.8%', '96%', 'rotate(-45deg) scale(1)'));
 
 
 function getId(id) {
     return document.getElementById(id);
 }
 
-function fillShape(id) {
+function placeShape(id) {
     if (!fields[id] && !gameOver) {
         fields[id] = currentShape;
         numberOfMoves++;
@@ -70,12 +74,16 @@ function checkForWin() {
         showTie();
     }
 }
+function showGameover() {
+    getId('gameover-screen').style.transform = "scale(1)";
+}
 function showTie() {
-    
+    showGameover();  
     
 }
 
 function showWinner(shape) {
+    showGameover();  
     getId('winner-text').innerHTML = `The winner is ${shape}!`;
     getId('winner-text').style.backgroundColor = (shape == 'circle' ? colorOfCircle : colorOfCross);
 }
@@ -85,4 +93,16 @@ function showWinningLine(index, shape) {
     for (const style in line) {
         getId('line').style[style] = line[style];
     }
+}
+function reset() {
+    fields = [];
+    for (let i = 0; i < 8; i++) {
+        getId('circle-' + i).classList.add('d-none');
+        getId('cross' + i).classList.add('d-none');
+    }
+    getId('line').style.transform = 'scale(0)';
+
+    let currentShape = 'cross';
+    let numberOfMoves = 0;
+    let gameOver = false;
 }

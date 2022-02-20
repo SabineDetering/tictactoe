@@ -3,6 +3,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: ivory;
+    width:100%;
 }
 h1{
     font-size: 60px;
@@ -31,25 +33,33 @@ h1{
 .player-inactive {
     opacity: 0.4;
 }
-
+.playfield{
+    width:399px;
+    max-width:100vw;
+    height:399px;
+    max-height:100vw;
+    position: relative;
+}
 table {
     border-collapse: collapse;
+    width: 100%;
+    height: 100%;
 }
 
 tr {
-    width: 399px;
+    width: 100%;
 }
 
 td {
-    width: 133px;
-    height: 133px;
+    width: 33.3%;
+    height: 33.3%;
     border: 5px solid black;
     position: relative;
     cursor: pointer;
 }
 
 td:hover {
-    background-color: palegoldenrod;
+    background-color: rgb(252, 239, 197);
 }
 
 tr:first-child td {
@@ -88,6 +98,18 @@ table img {
     transform:scale(0);
     transition: transform 1000ms ease-in-out;
 }
+#gameover-screen{
+    position:absolute;
+    z-index: 2;
+    background-color: ivory;
+    width:600px;
+    max-width:100vw;
+    height:400px;
+    max-height: 100vh;
+    transform: scale(0);
+    transition:transform 500ms ease-in-out;
+}
+
 #winner-text{
     font-size: 32px;
     margin-top:32px;
