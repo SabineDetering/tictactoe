@@ -123,7 +123,7 @@ function checkForWin() {
                 showWinningLine(2, i, currentShape);
             }
             gameOver = true;
-            setTimeout(showWinner, 1500, currentShape);
+            setTimeout(showWinner, 2000, currentShape);
         }
     }
 }
@@ -145,7 +145,7 @@ function showWinningLine(number, index, shape) {
 function checkForTie() {
     if (!gameOver && numberOfMoves == 9) {
         gameOver = true;
-        setTimeout(showTie, 1000);
+        setTimeout(showTie, 1500);
     }
 }
 
