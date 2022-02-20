@@ -16,6 +16,10 @@ h1 {
     font-size: 60px;
 }
 
+p {
+    font-size: 20px;
+}
+
 .form-control {
     font-size: 20px;
 }
@@ -24,7 +28,7 @@ h1 {
     margin-left: 16px;
 }
 
-input[type="radio"] {    
+input[type="radio"] {
     margin: 0;
     font: inherit;
     accent-color: #ff1616;
@@ -32,6 +36,23 @@ input[type="radio"] {
     height: 16px;
     border: 2px solid black;
     border-radius: 50%;
+    /* vertical-align: 50%; */
+}
+
+.symbol-select {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.form-control img {
+    width: 36px;
+    height: 36px;
+    vertical-align: middle;
+}
+
+.t-center {
+    text-align: center;
 }
 
 button {

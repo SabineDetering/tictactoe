@@ -6,8 +6,13 @@ let currentShape = 'cross';
 let numberOfMoves = 0;
 let gameOver = false;
 let winningPatterns = [];
-let colorOfCircle = 'yellow';
-let colorOfCross = 'aqua';
+let colorOfCircle = '';
+let colorOfCross = '';
+
+let yellowCircle = { image: './img/circle-yellow.png', color: '#ffde59' };
+let redCircle = { image: './img/circle-red.png', color: '#ff1616' };
+let blueCross = { image: './img/cross-blue.png', color: '#38b6ff' };
+let greenCross = { image: './img/cross-green.png', color: '#7ed957' };
 
 function lineMaker(pattern, top, left, width, transform) {
     return { pattern, line: { top, left, width, transform } }

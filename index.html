@@ -17,14 +17,6 @@
 
 <body>
     <h1>Tic Tac Toe</h1>
-    <div class="player-panel">
-        <div id="player-cross">
-            <img src="./img/cross.png">Player 1
-        </div>
-        <div id="player-circle" class="player-inactive">
-            <img src="./img/circle.png"> Player 2
-        </div>
-    </div>
 
     <div id="start-screen" class="screen start">
 
@@ -52,20 +44,44 @@
             </label>
         </div>
 
-        <div class="screen-text">Choose your symbol:</div>
-        <div>
-            <label class="form-control">
-                <input type="radio" name="difficulty" value="easy" checked="checked" />
-                easy
-            </label>
-            <label class="form-control">
-                <input type="radio" name="difficulty" value="difficult" />
-                difficult
-            </label>
+        <div class="screen-text">Choose symbols:</div>
+        <div class="symbol-select">
+            <div>
+                <p class="t-center"> Player 1:</p>
+                <div>
+                    <label class="form-control">
+                        <input type="radio" name="symbol1" value="blue" checked="checked" />
+                        <img src="./img/cross-blue.png" alt="">
+                    </label>
+                    <label class="form-control"><input type="radio" name="symbol1" value="green" />
+                        <img src="./img/cross-green.png" alt="">
+                    </label>
+                </div>
+            </div>
+            <div>
+                <p class="t-center">Player 2:</p>
+                <div>
+                    <label class="form-control">
+                        <input type="radio" name="symbol2" value="yellow" checked="checked" />
+                        <img src="./img/circle-yellow.png" alt="">
+                    </label>
+                    <label class="form-control"><input type="radio" name="symbol2" value="red" />
+                        <img src="./img/circle-red.png" alt="">
+                    </label>
+                </div>
+            </div>
         </div>
 
         <button onclick="start()">Start</button>
     </div>
+
+    <div class="player-panel">
+        <div id="player-cross">
+            <img src="./img/cross.png">Player 1
+        </div>
+        <div id="player-circle" class="player-inactive">
+            <img src="./img/circle.png"> Player 2
+        </div>
     </div>
 
     <div class="playfield">
