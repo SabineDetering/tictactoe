@@ -17,7 +17,7 @@
 
 <body>
     <h1>Tic Tac Toe</h1>
-<!--start screen----------------------------------------->
+    <!--start screen----------------------------------------->
     <div id="start-screen" class="screen start">
 
         <div class="screen-text">Choose playing mode:</div>
@@ -75,7 +75,7 @@
         <button onclick="start()">Start</button>
     </div>
 
-<!--game screen----------------------------------------->
+    <!--game screen----------------------------------------->
     <div class="player-panel">
         <div id="player-cross">
         </div>
@@ -110,15 +110,18 @@
                 </td>
             </tr>
         </table>
+        <!-- lines for winning patterns -->
         <div id="line-1" class="line"></div>
         <div id="line-2" class="line"></div>
     </div>
 
+    <!-- gameover screen -->
     <div id="gameover-screen" class="screen finish">
         <img src="./img/game-over.png" alt="">
         <div class="gameover-bottom">
-            <div id="winner-text" class="screen-text">The winner is </div>
+            <div id="winner-text" class="screen-text"></div>
             <button onclick="reset()">Restart</button>
+            <button onclick="showStartScreen()">Back to options</button>
         </div>
     </div>
 

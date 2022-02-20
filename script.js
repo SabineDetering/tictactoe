@@ -16,11 +16,6 @@ let symbols = {
     'yellowCircle': symbolMaker('./img/circle-yellow.png', '#ffde59'), 'redCircle': symbolMaker('./img/circle-red.png', '#ff1616'), 'blueCross': symbolMaker('./img/cross-blue.png', '#38b6ff'), 'greenCross': symbolMaker('./img/cross-green.png', '#7ed957')
 }
 
-// let yellowCircle = { image: './img/circle-yellow.png', color: '#ffde59' };
-// let redCircle = { image: './img/circle-red.png', color: '#ff1616' };
-// let blueCross = { image: './img/cross-blue.png', color: '#38b6ff' };
-// let greenCross = { image: './img/cross-green.png', color: '#7ed957' };
-
 function lineMaker(pattern, top, left, width, transform) {
     return { pattern, line: { top, left, width, transform } }
 }
@@ -40,7 +35,9 @@ winningPatterns.push(lineMaker([2, 4, 6], '50%', '1.8%', '96%', 'rotate(-45deg) 
 function getId(id) {
     return document.getElementById(id);
 }
-
+/**
+ * hides start screen and transfers choices for mode, difficulty and symbols 
+ */
 function start() {
     getId('start-screen').style.transform = 'scale(0)';
     numberofPlayers = +document.querySelector('input[name="mode"]:checked').value;
@@ -49,7 +46,9 @@ function start() {
     symbolCircle = symbols[document.querySelector('input[name="symbol2"]:checked').value];
     renderGameScreen();
 }
-
+/**
+ * shows chosen symbols in player panel
+ */
 function renderGameScreen() {
     getId('player-cross').innerHTML =
         `<img src="${symbolCross.image}">Player 1`;
@@ -57,6 +56,10 @@ function renderGameScreen() {
         `<img src="${symbolCircle.image}">Player 2`;
 }
 
+/**
+ * places symbol in field if feasible and checks if game is over
+ * @param {integer} id of field
+ */
 function placeShape(id) {
     if (!fields[id] && !gameOver) {
         fields[id] = currentShape;
@@ -65,12 +68,21 @@ function placeShape(id) {
         checkForWin();
         checkForTie();
         togglePlayer();
-        if (!gameOver && numberofPlayers == 1 && numberOfMoves % 2 == 1) {
+        if (computersTurn()) {
             setTimeout(computerMove, 500);
         }
     }
 }
-
+/**
+ * returns true if game is not over and computer is next player (one player mode and odd number of moves)
+ * @returns boolean
+ */
+function computersTurn() {
+    return !gameOver && numberofPlayers == 1 && numberOfMoves % 2 == 1
+}
+/**
+ * switches active player and shape
+ */
 function togglePlayer() {
     if (currentShape == 'cross') {
         currentShape = 'circle';
@@ -82,7 +94,9 @@ function togglePlayer() {
         getId('player-circle').classList.add('player-inactive');
     };
 }
-
+/**
+ * shows shapes in the playfield
+ */
 function draw() {
     for (let i = 0; i < fields.length; i++) {
         const field = getId('td-' + i);
@@ -93,7 +107,10 @@ function draw() {
         }
     }
 }
-
+/**
+ * checks if current player meets any winning pattern and draws a line through winning patterns
+ * sets gameOver=true if there is a winner
+ */
 function checkForWin() {
     for (let i = 0; i < winningPatterns.length; i++) {
         let pattern = winningPatterns[i].pattern;
@@ -110,18 +127,39 @@ function checkForWin() {
         }
     }
 }
+/**
+ * shows a line through a winning pattern using the styles of the pattern and the main color of the winner
+ */
+function showWinningLine(number, index, shape) {
+    let winningLine = winningPatterns[index].line;
+    let displayedLine = getId('line-' + number);
+    displayedLine.style.backgroundColor = (shape == 'circle' ? symbolCircle.color : symbolCross.color);
+    for (const style in winningLine) {
+        displayedLine.style[style] = winningLine[style];
+    }
+}
 
+/**
+ * checks if there are no more moves and then sets gameOver=true
+ */
 function checkForTie() {
     if (!gameOver && numberOfMoves == 9) {
         gameOver = true;
         setTimeout(showTie, 1000);
     }
 }
+
+/**
+ * shows finish screen for tie
+ */
 function showTie() {
     getId('winner-text').innerHTML = `Tie!`;
     showGameover();
 }
 
+/**
+ * shows finish screen for winner
+ */
 function showWinner(shape) {
     let winnerText = getId('winner-text');
     winnerText.innerHTML = `The winner is `;
@@ -132,26 +170,25 @@ function showWinner(shape) {
         winnerText.innerHTML +=
             `Player 2&nbsp <img src='${symbolCircle.image}' style="width:40px;">`;
     }
-    ;
     showGameover();
 }
 
 function showGameover() {
     getId('gameover-screen').style.transform = "scale(1)";
 }
-
-function showWinningLine(number, index, shape) {
-    let winningLine = winningPatterns[index].line;
-    let displayedLine = getId('line-' + number);
-    displayedLine.style.backgroundColor = (shape == 'circle' ? symbolCircle.color : symbolCross.color);
-    for (const style in winningLine) {
-        displayedLine.style[style] = winningLine[style];
-    }
-}
+/**
+ * resets game
+ */
 function reset() {
     resetDisplay();
     resetVars();
 }
+
+/**
+ * removes all shapes and lines from play field
+ * hides gameover screen
+ * initialises active player to player 1
+ */
 function resetDisplay() {
     for (let i = 0; i < 9; i++) {
         getId('td-' + i).innerHTML = '';
@@ -162,9 +199,19 @@ function resetDisplay() {
     getId("player-cross").classList.remove("player-inactive");
     getId("player-circle").classList.add("player-inactive");
 }
+/**
+ * resets all game relevant variables
+ */
 function resetVars() {
     for (let i = 0; i < 9; i++) { fields[i] = ''; }
     currentShape = 'cross';
     numberOfMoves = 0;
     gameOver = false;
+}
+/**
+ * shows start screen to allow new choices
+ */
+function showStartScreen() {
+    reset();
+    getId('start-screen').style.transform = 'scale(1)';
 }

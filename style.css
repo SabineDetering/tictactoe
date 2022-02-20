@@ -37,7 +37,6 @@ input[type="radio"] {
     height: 16px;
     border: 2px solid black;
     border-radius: 50%;
-    /* vertical-align: 50%; */
 }
 
 .symbol-select {
@@ -60,6 +59,7 @@ button {
     background-color: #ffde59;
     border: 2px solid #ff1616;
     font-size: 28px;
+    width: 220px;
     padding: 8px;
     box-shadow: 2px 2px 5px 2px rgba(92, 6, 6, 0.7);
     margin: 20px;
@@ -142,11 +142,6 @@ table img {
     width: 70%;
 }
 
-.d-none {
-    display: none
-}
-
-
 .line {
     height: 8px;
     position: absolute;
@@ -169,29 +164,6 @@ table img {
     justify-content: center;
 }
 
-.start {
-    transform: scale(1);
-    border: #ff1616 2px solid;
-    background-color: rgb(255, 255, 240);
-    box-shadow: 2px 2px 8px 3px rgba(92, 6, 6, 0.7);
-}
-
-.finish {
-    transform: scale(0);
-    background-color: rgb(255, 255, 240);
-    height:calc(100vh - 150px)
-}
-.finish img{
-    width:100%;
-}
-
-.gameover-bottom {
-    position: absolute;
-    top: 60%;
-    width: 100%;
-    text-align: center;
-}
-
 .screen-text {
     font-size: 28px;
     margin-top: 40px;
@@ -202,9 +174,38 @@ table img {
     text-align: center;
 }
 
+.start {
+    transform: scale(1);
+    border: #ff1616 2px solid;
+    background-color: rgb(255, 255, 240);
+    box-shadow: 2px 2px 8px 3px rgba(92, 6, 6, 0.7);
+}
+
+.finish {
+    transform: scale(0);
+    background-color: rgb(255, 255, 240);
+    height: calc(100vh - 150px)
+}
+
+.finish img {
+    width: 100%;
+}
+
+.gameover-bottom {
+    position: absolute;
+    top: 60%;
+    width: 100%;
+    text-align: center;
+}
+
 @media(max-width:520px) {
     h1 {
         font-size: 40px;
+    }
+
+    button {
+        font-size: 24px;
+        width: 200px;
     }
 
     .screen {
